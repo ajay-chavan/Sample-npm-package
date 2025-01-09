@@ -27,7 +27,7 @@ jobs:
 
       - name: Create .npmrc
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{env.NPM_TOKEN}}" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{secrets.NPM_TOKEN}}" > .npmrc
           cat .npmrc
         env:
            NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
       - name: Configure GitHub Registry Auth
         run: |
           npm config set @ajay-chavan:registry=https://npm.pkg.github.com
-          npm config set //npm.pkg.github.com/:_authToken=${{env.NPM_TOKEN}}
+          npm config set //npm.pkg.github.com/:_authToken=${{secrets.NPM_TOKEN}}
           cat .npmrc
         env:
            NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
