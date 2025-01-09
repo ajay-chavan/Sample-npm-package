@@ -25,6 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Configure GitHub Registry Auth
+        run: |
+          npm config set @ajay-chavan:registry=https://npm.pkg.github.com
+          npm config set //npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: npm install
