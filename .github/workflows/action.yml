@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: cat .npmrc
+        run: npm install
         env:
           NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
 
@@ -35,4 +35,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Secret added to .npmrc
-          echo test, and deploy your project.
+          echo cat .npmrc
