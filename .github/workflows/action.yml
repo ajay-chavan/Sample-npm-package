@@ -28,6 +28,8 @@ jobs:
       - name: Create .npmrc
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        env:
+           NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
 
       - name: Configure GitHub Registry Auth
         run: |
