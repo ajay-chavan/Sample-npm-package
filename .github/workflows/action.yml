@@ -32,26 +32,22 @@ jobs:
     #    env:
      #      NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
 
-      - name: Configure GitHub Registry Auth
+#      - name: Configure GitHub Registry Auth
+#        run: |
+#          npm config set @ajay-chavan:registry=https://npm.pkg.github.com
+#          npm config set //npm.pkg.github.com/:_authToken=${{secrets.NPM_TOKEN}}
+#          cat .npmrc
+#        env:
+#           NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
+
+      - name: Replace Token in .npmrc
         run: |
-          npm config set @ajay-chavan:registry=https://npm.pkg.github.com
-          npm config set //npm.pkg.github.com/:_authToken=${{secrets.NPM_TOKEN}}
+          sed -i "s/\${NPM_TOKEN}/${{ secrets.NPM_TOKEN }}/" .npmrc
           cat .npmrc
-        env:
-           NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
-           
+  
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: npm install
         env:
           NPM_TOKEN : ${{ secrets.NPM_TOKEN }}
 
-      - name: Replace Token in .npmrc
-        run: |
-          sed -i "s/\${NPM_TOKEN}/${{ secrets.NPM_TOKEN }}/" .npmrc
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          cat .npmrc
-          echo Secret added to .npmrc
